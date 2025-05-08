@@ -21,16 +21,16 @@ std::string gen_sha(std::string msg){
 	SHA1 hash;
 
 	StringSource(msg, true,
-			  new HashFilter(hash,
-					new StringSink(digest)
-					)
-			  );
+	new HashFilter(hash,
+	new StringSink(digest)
+	)
+	);
 
 	StringSource(digest, true,
-			  new HexEncoder(
-			  new StringSink(hexDigest),
-			  false   )
-			  );
+	new HexEncoder(
+	new StringSink(hexDigest),
+	false)
+	);
 
 	return hexDigest;
 }
