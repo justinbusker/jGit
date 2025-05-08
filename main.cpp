@@ -1,8 +1,10 @@
 #include "jgit.hpp"
+#include "utils.hpp"
+#include <iostream>
 
 using namespace jgit;
 
 int main(){
-	init();
+	std::cout << gen_sha("helloooo");
 	return 0;
 }

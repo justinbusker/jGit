@@ -1,8 +1,3 @@
-#include <openssl/sha.h>
+#include <iostream>
+#include "utils.hpp"
 
-void create_object(){
-	
-
-
-
-}
