@@ -6,6 +6,7 @@
 #include <cryptopp/files.h>
 #include <cryptopp/filters.h>
 #include <cryptopp/sha.h>
+#include <sys/stat.h>
 using namespace CryptoPP;
 
 bool check_init(){
@@ -57,4 +58,16 @@ std::string gen_sha(std::string msg){
 	);
 
 	return hexDigest;
+}
+
+std::string get_jgit_path(){
+	
+}
+
+bool file_in_tracked(std::string file){
+	get_file_contents("./.jgit")
+}
+
+void add_to_tracked(std::string path){
+
 }

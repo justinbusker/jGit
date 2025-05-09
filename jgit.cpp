@@ -14,9 +14,26 @@ int init(){
 	std::filesystem::create_directories("./.jgit/refs/heads");
 
 	create_file("HEAD", "./.jgit/");
+	create_file("TRACKED", "./.jgit/");
+	create_file("COMMIT_MSG", "./.jgit/");
 
 	return 0;
 }
+
+int commit(std::string commit_msg){
+	if(!check_init()){
+		std::cerr << "Initialize jGit first!" << std::endl;
+		return 1;
+	}
+	write_to_file(".jgit/COMMIT_MSG", commit_msg);
+	return 0;
+}
+
+int add(std::string path){
+
+}
+
+
 
 
 }

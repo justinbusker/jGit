@@ -1,12 +1,17 @@
 A simple recreation of git for my learning / fun
 
 
-### to do:
+### commands to do:
 
-init()
+* init
 
-add()
+* add
 
-commit()
+* commit
+
+* log
 
 
+### things to implement:
+* recursively find .jgit directory 
+	- as of right now when calling commands if you are in a subdirectory it will generate a whole new .jgit
