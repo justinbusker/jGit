@@ -20,19 +20,21 @@ std::string get_file_contents(std::string file_path){
 	std::ifstream file(file_path);
 	if(!file.is_open()){
 		throw std::runtime_error("File could not open / does not exist");
-		return "";
 	}
-
 	std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-
 	return content;
-	
-
 }
 
-void create_file(std::string file_name, std::string file_path){
+void create_file(std::string file_name, std::string dir_path){
 	std::ofstream file;
-	file.open(file_path + file_name);
+	file.open(dir_path + file_name);
+	file.close();
+}
+
+void write_to_file(std::string file_path, std::string content){
+	std::ofstream file;
+	file.open(file_path);
+	file << content;
 	file.close();
 }
 
