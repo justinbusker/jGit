@@ -1,22 +1,12 @@
 #include <iostream>
 #include <filesystem>
 #include <fstream>
+#include "utils.hpp"
 
 namespace jgit {
 
-// "Private" functions
-namespace {
-
-void create_file(std::string file_name, std::string file_path){
-	std::ofstream file;
-	file.open(file_path + file_name);
-	file.close();
-}
-
-}
-
 int init(){
-	if (std::filesystem::exists("./.jgit")){
+	if (check_init()){
 		std::cerr << "jgit already initialized!" << std::endl;
 		return 1;
 	}

@@ -1,10 +1,11 @@
 #include "jgit.hpp"
 #include "utils.hpp"
+#include "objects.hpp"
 #include <iostream>
 
 using namespace jgit;
 
 int main(){
-	std::cout << gen_sha("helloooo");
+	create_blob("test.txt");
 	return 0;
 }
