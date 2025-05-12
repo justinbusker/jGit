@@ -20,3 +20,5 @@ A simple recreation of git for my learning / fun
 * commit and blob object creation
 * commit file rewriting
 * head file
+* .jgit directory creation
+* init & init checking
