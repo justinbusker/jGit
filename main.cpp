@@ -6,6 +6,6 @@
 using namespace jgit;
 
 int main(){
-	add_to_tracked("./add.cpp");
+	add_to_tracked("./objects.cpp");
 	return 0;
 }

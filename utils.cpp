@@ -27,11 +27,11 @@ void create_file(std::string file_name, std::string dir_path){
 	file.close();
 }
 
-void write_to_file(std::string file_path, std::string content){
+void write_to_file(std::string file_path, std::string content, bool append = false){
 	std::cout << "Writing to " + file_path << std::endl;
 	std::ofstream file;
-	file.open(file_path);
-	file << content;
+	file.open(file_path, append ? std::ofstream::app : std::ofstream::trunc);
+	file << "\n" + content;
 	file.close();
 }
 
@@ -56,7 +56,7 @@ std::string gen_sha(std::string msg){
 	return hexDigest;
 }
 
-std::string get_jgit_path(std::string path){
+std::string get_jgit_path(std::string path = "."){
 	if(std::filesystem::exists(path + "/.jgit")){
 		std::cout << "FOUND JGIT IN " << path << std::endl;
 		jgit_path = path + "/.jgit/";
@@ -85,8 +85,18 @@ bool is_jgit_dir(std::string path){
 	return false;
 }
 
-bool file_in_tracked(std::string file){
-	get_file_contents("./.jgit");
+bool is_file_tracked(std::string file_path){
+	if(jgit_path.empty()){
+		get_jgit_path();
+	}
+	std::string tracked_files = get_file_contents(jgit_path + "/TRACKED");
+	if(tracked_files.find(file_path) != -1){
+		std::cout << "File already tracked!";
+		return true;
+	} else {
+		std::cout << file_path + " is not tracked" << std::endl;
+	}
+	return false;
 }
 
 void add_to_tracked(std::string path){
@@ -95,9 +105,11 @@ void add_to_tracked(std::string path){
 			std::cout << dir_entry.path() << std::endl;
 		}
 	} else if(std::filesystem::exists(path)){
-		std::cout << "File exists" << std::endl;
-		get_jgit_path(".");
-		write_to_file(jgit_path + "TRACKED", path);
+		if(!is_file_tracked(path)) {
+			std::cout << "File exists" << std::endl;
+			get_jgit_path(".");
+			write_to_file(jgit_path + "TRACKED", path, true);
+		}
 	} else {
 		std::cout << "Cannot find file " + path << std::endl;
 	}
@@ -106,3 +118,5 @@ void add_to_tracked(std::string path){
 bool check_init(){
 	return is_jgit_dir(".");
 }
+
+

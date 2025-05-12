@@ -25,11 +25,15 @@ int commit(std::string commit_msg){
 		std::cerr << "Initialize jGit first!" << std::endl;
 		return 1;
 	}
-	write_to_file(".jgit/COMMIT_MSG", commit_msg);
+	write_to_file(".jgit/COMMIT_MSG", commit_msg, false);
 	return 0;
 }
 
 int add(std::string path){
+
+}
+
+int status(){
 
 }
 
