@@ -6,8 +6,6 @@
 using namespace jgit;
 
 int main(){
-	create_blob("test.txt");
-	commit("test commit");
-	commit("another commit");
+	std::cout << get_jgit_path("./");
 	return 0;
 }

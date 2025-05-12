@@ -60,12 +60,36 @@ std::string gen_sha(std::string msg){
 	return hexDigest;
 }
 
-std::string get_jgit_path(){
-	
+std::string get_jgit_path(std::string path){
+	if(std::filesystem::exists(path + "/.jgit")){
+		std::cout << "FOUND JGIT IN " << path << std::endl;
+		return path;
+	} else if (!std::filesystem::equivalent(path, "/")){
+		path = "../" + path;
+		return get_jgit_path(path);
+	} else {
+		std::cout << "get_jgit_path exited at root (/)" << std::endl;
+	}
+
+	return "";
+}
+
+bool is_jgit_dir(std::string path){
+	if(std::filesystem::exists(path + "/.jgit")){
+		std::cout << "FOUND JGIT IN " << path << std::endl;
+		return true;
+	} else if (!std::filesystem::equivalent(path, "/")){
+		path = "../" + path;
+		return is_jgit_dir(path);
+	} else {
+		std::cout << "is_jgit_dir exited at root (/)" << std::endl;
+	}
+
+	return false;
 }
 
 bool file_in_tracked(std::string file){
-	get_file_contents("./.jgit")
+	get_file_contents("./.jgit");
 }
 
 void add_to_tracked(std::string path){

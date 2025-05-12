@@ -12,5 +12,12 @@ void create_file(std::string file_name, std::string file_path);
 void write_to_file(std::string file_path, std::string content);
 
 std::string gen_sha(std::string input);
+std::string get_jgit_path(std::string path);
+
+bool is_jgit_dir(std::string path);
+
+bool file_in_tracked(std::string file);
+
+void add_to_tracked(std::string path);
 
 #endif
