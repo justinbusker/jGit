@@ -9,12 +9,7 @@
 #include <sys/stat.h>
 using namespace CryptoPP;
 
-bool check_init(){
-	if (std::filesystem::exists("./.jgit")){
-		return true;
-	}
-	return false;
-}
+std::string jgit_path = "";
 
 std::string get_file_contents(std::string file_path){
 
@@ -33,6 +28,7 @@ void create_file(std::string file_name, std::string dir_path){
 }
 
 void write_to_file(std::string file_path, std::string content){
+	std::cout << "Writing to " + file_path << std::endl;
 	std::ofstream file;
 	file.open(file_path);
 	file << content;
@@ -63,6 +59,7 @@ std::string gen_sha(std::string msg){
 std::string get_jgit_path(std::string path){
 	if(std::filesystem::exists(path + "/.jgit")){
 		std::cout << "FOUND JGIT IN " << path << std::endl;
+		jgit_path = path + "/.jgit/";
 		return path;
 	} else if (!std::filesystem::equivalent(path, "/")){
 		path = "../" + path;
@@ -93,5 +90,19 @@ bool file_in_tracked(std::string file){
 }
 
 void add_to_tracked(std::string path){
+	if(std::filesystem::is_directory(path)){
+		for(auto const& dir_entry: std::filesystem::directory_iterator(path)){
+			std::cout << dir_entry.path() << std::endl;
+		}
+	} else if(std::filesystem::exists(path)){
+		std::cout << "File exists" << std::endl;
+		get_jgit_path(".");
+		write_to_file(jgit_path + "TRACKED", path);
+	} else {
+		std::cout << "Cannot find file " + path << std::endl;
+	}
+}
 
+bool check_init(){
+	return is_jgit_dir(".");
 }

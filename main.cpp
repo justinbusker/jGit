@@ -6,6 +6,6 @@
 using namespace jgit;
 
 int main(){
-	std::cout << get_jgit_path("./");
+	add_to_tracked("./add.cpp");
 	return 0;
 }
