@@ -24,6 +24,7 @@ So that's how this project started! One day I was curious at how Git really does
 
 
 ### things to implement:
+* commit object file contents to include parent commit
 * tree objects
 * make working refs & heads
 
