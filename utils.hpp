@@ -19,6 +19,6 @@ bool is_jgit_dir(std::string path);
 
 bool is_file_tracked(std::string file);
 
-void add_to_tracked(std::string path);
+void add_to_tracked(std::string path, std::string sha);
 
 #endif

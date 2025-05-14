@@ -5,6 +5,7 @@
 namespace jgit{
 	int init();
 	int commit(std::string commit_msg);
+	int add(std::string path);
 };
 
 #endif

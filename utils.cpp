@@ -1,6 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include <fstream>
+#include <vector>
 #include <cryptopp/cryptlib.h>
 #include <cryptopp/hex.h>
 #include <cryptopp/files.h>
@@ -31,7 +32,6 @@ void write_to_file(std::string file_path, std::string content, bool append = fal
 	std::cout << "Writing to " + file_path << std::endl;
 	std::ofstream file;
 	file.open(file_path, append ? std::ofstream::app : std::ofstream::trunc);
-	file << "\n" + content;
 	file.close();
 }
 
@@ -99,20 +99,27 @@ bool is_file_tracked(std::string file_path){
 	return false;
 }
 
-void add_to_tracked(std::string path){
-	if(std::filesystem::is_directory(path)){
+void add_to_tracked(std::string path, std::string sha){
+	/* if(std::filesystem::is_directory(path)){
 		for(auto const& dir_entry: std::filesystem::directory_iterator(path)){
 			std::cout << dir_entry.path() << std::endl;
-		}
-	} else if(std::filesystem::exists(path)){
+		} */
+	if(std::filesystem::exists(path)){
 		if(!is_file_tracked(path)) {
 			std::cout << "File exists" << std::endl;
 			get_jgit_path(".");
-			write_to_file(jgit_path + "TRACKED", path, true);
+			write_to_file(jgit_path + "TRACKED", path + " " + sha , true);
 		}
 	} else {
 		std::cout << "Cannot find file " + path << std::endl;
 	}
+}
+
+std::vector<std::string> get_tracked_files(){
+	if(jgit_path.empty()){
+		get_jgit_path();
+	}
+
 }
 
 bool check_init(){

@@ -30,7 +30,11 @@ int commit(std::string commit_msg){
 }
 
 int add(std::string path){
-
+	if(std::filesystem::is_directory(path)){
+		std::cout << "Adding a directory" << std::endl;
+	} else {
+		std::cout << "adding file" << std::endl;
+	}
 }
 
 int status(){
