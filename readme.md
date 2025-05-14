@@ -1,7 +1,7 @@
 A simple recreation of git for my learning / fun
 
 # Why did I build this
-If you are passionate about software engineering, it is impossible to not use Git.
+If you are passionate about software engineering, it is almost impossible to not use Git. You're almost using right now.
 
 Throughout school and personal projects, I have learned how to use Git quite well in a solo and group setting, but I had no idea how Git actually works.
 
