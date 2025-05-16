@@ -13,12 +13,16 @@ void create_object(std::string file_path, std::string type){
 	add_to_tracked(file_path, sha_code);
 }
 
+void create_commit(){
+	std::string jgit_path = get_jgit_path(".");
+
+}
+
 void create_blob(std::string file_path){
 	create_object(file_path, "blob");
 }
 
 void create_commit(std::string file_path){
-	create_object(file_path, "commit");
 }
 
 void create_tree(){

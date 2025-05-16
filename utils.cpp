@@ -30,8 +30,14 @@ void create_file(std::string file_name, std::string dir_path){
 
 void write_to_file(std::string file_path, std::string content, bool append = false){
 	std::cout << "Writing to " + file_path << std::endl;
+	std::cout << "Write content: " + content << std::endl;
 	std::ofstream file;
 	file.open(file_path, append ? std::ofstream::app : std::ofstream::trunc);
+	if(append && !get_file_contents(file_path).empty()){
+		file << "\n" + content;
+	} else {
+		file << content;
+	}
 	file.close();
 }
 

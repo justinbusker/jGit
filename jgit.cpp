@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <fstream>
 #include "utils.hpp"
+#include "objects.hpp"
 
 namespace jgit {
 
@@ -12,10 +13,13 @@ int init(){
 	}
 	std::filesystem::create_directories("./.jgit/objects");
 	std::filesystem::create_directories("./.jgit/refs/heads");
+	std::filesystem::create_directories("./.jgit/logs");
 
 	create_file("HEAD", "./.jgit/");
 	create_file("TRACKED", "./.jgit/");
 	create_file("COMMIT_MSG", "./.jgit/");
+	create_file("HEAD", "./.jgit/logs/");
+	create_file("main", "./.jgit/refs/heads/");
 
 	return 0;
 }
@@ -34,6 +38,7 @@ int add(std::string path){
 		std::cout << "Adding a directory" << std::endl;
 	} else {
 		std::cout << "adding file" << std::endl;
+		create_blob(path);
 	}
 }
 
