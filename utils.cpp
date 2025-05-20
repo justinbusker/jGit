@@ -63,15 +63,17 @@ std::string gen_sha(std::string msg){
 }
 
 std::string get_jgit_path(std::string path = "."){
-	if(std::filesystem::exists(path + "/.jgit")){
-		std::cout << "FOUND JGIT IN " << path << std::endl;
-		jgit_path = path + "/.jgit/";
-		return path;
-	} else if (!std::filesystem::equivalent(path, "/")){
-		path = "../" + path;
-		return get_jgit_path(path);
-	} else {
-		std::cout << "get_jgit_path exited at root (/)" << std::endl;
+	if(jgit_path.empty()){
+		if(std::filesystem::exists(path + "/.jgit")){
+			std::cout << "FOUND JGIT IN " << path << std::endl;
+			jgit_path = path + "/.jgit/";
+			return path;
+		} else if (!std::filesystem::equivalent(path, "/")){
+			path = "../" + path;
+			return get_jgit_path(path);
+		} else {
+			std::cout << "get_jgit_path exited at root (/)" << std::endl;
+		}
 	}
 
 	return "";
@@ -130,6 +132,34 @@ std::vector<std::string> get_tracked_files(){
 
 bool check_init(){
 	return is_jgit_dir(".");
+}
+
+std::string get_parent_hash(){
+	get_jgit_path(".");
+
+	std::string parent_hash;
+	
+	std::ifstream ref_file(jgit_path + "/refs/heads/main"); // TODO: figure out how to detect branches
+	std::getline(ref_file, parent_hash, ' ');
+
+	return parent_hash;
+}
+
+std::vector<std::string> split(std::string file_path, char delimiter){
+	std::ifstream file(file_path);
+	std::vector<std::string> split_file;
+	std::string content;
+
+	if(!file.is_open()){
+		throw std::runtime_error("Could not find file in split function!");
+	}	
+
+	while(!file.eof()){
+		std::getline(file, content, delimiter);
+		split_file.push_back(content);
+	}
+
+	return split_file;
 }
 
 

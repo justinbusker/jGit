@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+extern std::string jgit_path;
+
 bool check_init();
 
 std::string get_file_contents(std::string file_path);
@@ -21,4 +23,7 @@ bool is_file_tracked(std::string file);
 
 void add_to_tracked(std::string path, std::string sha);
 
+std::string get_parent_hash();
+
+std::vector<std::string> split(std::string file_path, char delimiter);
 #endif

@@ -21,10 +21,13 @@ void create_commit(){
 void create_blob(std::string file_path){
 	create_object(file_path, "blob");
 }
-
 void create_commit(std::string file_path){
+	if(jgit_path.empty()){
+		get_jgit_path(".");
+	}
+	std::string tracked_contents = get_file_contents(jgit_path + "/TRACKED");
 }
 
 void create_tree(){
-
+	
 }

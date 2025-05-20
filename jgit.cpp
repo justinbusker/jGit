@@ -18,7 +18,11 @@ int init(){
 	create_file("HEAD", "./.jgit/");
 	create_file("TRACKED", "./.jgit/");
 	create_file("COMMIT_MSG", "./.jgit/");
+
+	// file of all commits parent -> commit
 	create_file("HEAD", "./.jgit/logs/");
+	
+	// current commit
 	create_file("main", "./.jgit/refs/heads/");
 
 	return 0;
